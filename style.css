@@ -1,0 +1,310 @@
+/* ============================================
+   OMEGA SECURITY SYSTEMS - MAIN STYLES
+   ============================================ */
+
+:root {
+    --neon-green: #00ff41;
+    --neon-cyan: #00d4ff;
+    --neon-red: #ff0040;
+    --neon-yellow: #ffaa00;
+    --dark-bg: #050505;
+    --panel-bg: rgba(0, 20, 0, 0.95);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark-bg);
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Typography */
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.font-mono {
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* Glow Effects */
+.glow-green {
+    text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 30px var(--neon-green);
+}
+
+.glow-cyan {
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-cyan);
+}
+
+.glow-red {
+    text-shadow: 0 0 10px var(--neon-red), 0 0 20px var(--neon-red), 0 0 30px var(--neon-red);
+}
+
+.glow-yellow {
+    text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow), 0 0 30px var(--neon-yellow);
+}
+
+/* CRT Scanline Effect */
+.scanlines::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.3) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+    animation: scanlineMove 10s linear infinite;
+}
+
+@keyframes scanlineMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+/* Matrix Rain Canvas */
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* Cyber Grid Background */
+.cyber-grid {
+    background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    position: relative;
+}
+
+.cyber-grid::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 0%, var(--dark-bg) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Animations */
+@keyframes scanLine {
+    0% { top: 0; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+.face-scan-line {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    box-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+    animation: scanLine 2s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes facePulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+
+.face-target {
+    animation: facePulse 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px var(--neon-green); }
+    50% { box-shadow: 0 0 40px var(--neon-green), 0 0 60px var(--neon-green); }
+}
+
+.pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes shieldPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px var(--neon-green)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 40px var(--neon-green)); }
+}
+
+.shield-pulse {
+    animation: shieldPulse 3s ease-in-out infinite;
+}
+
+@keyframes fingerprintScan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 100%; }
+}
+
+.fingerprint-scanner {
+    background: linear-gradient(180deg, 
+        transparent 0%, 
+        rgba(0, 255, 65, 0.3) 50%, 
+        transparent 100%);
+    background-size: 100% 200%;
+    animation: fingerprintScan 2s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner {
+    border: 3px solid rgba(0, 255, 65, 0.1);
+    border-top-color: var(--neon-green);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes accessGranted {
+    0% { transform: scale(0.8); opacity: 0; filter: blur(10px); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+
+.access-granted {
+    animation: accessGranted 0.6s ease-out forwards;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: var(--neon-green);
+    animation: blink 1s step-end infinite;
+}
+
+/* Video Container */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+}
+
+#videoFeed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+#faceOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+    pointer-events: none;
+}
+
+/* Button States */
+.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(0.5);
+}
+
+/* Toast Notifications */
+.toast {
+    transform: translateX(400px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neon-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-cyan);
+}
+
+/* Selection */
+::selection {
+    background: var(--neon-green);
+    color: #000;
+}
+
+/* Focus States */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--neon-green);
+    outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .font-orbitron {
+        letter-spacing: 0.05em;
+    }
+    
+    #securityGate .relative.z-10 {
+        padding: 1rem;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
